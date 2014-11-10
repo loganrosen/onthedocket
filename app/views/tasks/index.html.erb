@@ -1,3 +1,4 @@
+<% if user_signed_in? %>
 <% @incomplete_tasks.each do |task| %>
 	<div class="task incomplete"><%= link_to '&#9744;'.html_safe, complete_task_path(task), method: :put %> <%= task.body %> <%= link_to '&#9999;'.html_safe, edit_task_path(task) %> <%= link_to '&#10007;'.html_safe, task, method: :delete, data: { confirm: 'Are you sure?' } %> </div>
 <% end %>
@@ -8,3 +9,6 @@
 <br>
 
 <%= link_to 'New Task', new_task_path %>
+<% else %>
+	<br /><br />You're not signed in! Please sign up or log in to track your tasks.
+<% end %>

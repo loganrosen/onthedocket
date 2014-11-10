@@ -4,8 +4,10 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @incomplete_tasks = Task.where(completed: false)
-    @completed_tasks = Task.where(completed: true)
+    if user_signed_in?
+      @incomplete_tasks = current_user.tasks.where(completed: false)
+      @completed_tasks = current_user.tasks.where(completed: true)
+    end
 
   end
 
@@ -27,11 +29,12 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
+    @task.user_id = current_user.id
+    @task.completed = false
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
-        format.json { render :show, status: :created, location: @task }
+        format.html { redirect_to :tasks, notice: 'Task was successfully created.' }
       else
         format.html { render :new }
         format.json { render json: @task.errors, status: :unprocessable_entity }
@@ -44,8 +47,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
-        format.json { render :show, status: :ok, location: @task }
+        format.html { redirect_to :tasks, notice: 'Task was successfully updated.' }
       else
         format.html { render :edit }
         format.json { render json: @task.errors, status: :unprocessable_entity }
