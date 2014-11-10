@@ -19,6 +19,9 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe TasksController, :type => :controller do
+	before :each do
+		  sign_out :user
+	end
 
   # This should return the minimal set of attributes required to create a valid
   # Task. As you add validations to Task, be sure to
