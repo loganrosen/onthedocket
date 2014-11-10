@@ -1,3 +1,45 @@
 // Place all the styles related to the tasks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.task
+{
+	height: 20px;
+	line-height: 20px;
+	padding-top: 2em;
+	text-align: center;
+	font-size: 2em;
+}
+
+body
+{
+	background: rgb(240,240,240);
+	margin: 0;
+	height: 100%;
+	font-family: 'Arial';
+}
+
+a
+{
+	text-decoration: none;
+}
+
+html
+{
+	height: 100%;
+}
+
+#wrapper
+{
+	width: 75%;
+	height: 100%;
+	margin: 0 auto;
+	background: rgb(255,255,255);
+	padding-top: 2em;
+}
+
+#title
+{
+	font-size: 4em;
+	text-align: center;
+	font-family: 'Walter Turncoat', cursive;
+}

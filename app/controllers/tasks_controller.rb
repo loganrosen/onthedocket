@@ -4,7 +4,9 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @incomplete_tasks = Task.where(completed: false)
+    @completed_tasks = Task.where(completed: true)
+
   end
 
   # GET /tasks/1
@@ -58,6 +60,16 @@ class TasksController < ApplicationController
     respond_to do |format|
       format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  # PATCH/PUT /tasks/1
+  # PATCH/PUT /tasks/1.json
+  def complete
+    @task = Task.find(params[:id])
+    @task.toggle! :completed
+    respond_to do |format|
+      format.html { redirect_to tasks_url }
     end
   end
 

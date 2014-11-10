@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Onthedocket</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
-</html>
+	<head>
+		<title>Onthedocket</title>
+		<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+		<%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Walter+Turncoat' %>
+		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+		<%= csrf_meta_tags %>
+	</head>
+	<body>
+		<div id="wrapper">
+			<div id="title">On the Docket</div>
+			<% if user_signed_in? %>
+				Signed in as <b><%= current_user.email %></b>.
+				<%= link_to 'Edit profile', edit_user_registration_path %> |
+				<%= link_to "Logout", destroy_user_session_path, method: :delete  %>
+			<% else %>
+				<%= link_to "Sign up", new_user_registration_path  %> |
+				<%= link_to "Login", new_user_session_path  %>
+			<% end %>
+				<%= yield %>
+			</div>
+		</body>
+	</html>

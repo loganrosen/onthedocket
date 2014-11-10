@@ -1,27 +1,10 @@
-<h1>Listing tasks</h1>
+<% @incomplete_tasks.each do |task| %>
+	<div class="task incomplete"><%= link_to '&#9744;'.html_safe, complete_task_path(task), method: :put %> <%= task.body %> <%= link_to '&#9999;'.html_safe, edit_task_path(task) %> <%= link_to '&#10007;'.html_safe, task, method: :delete, data: { confirm: 'Are you sure?' } %> </div>
+<% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Body</th>
-      <th>Completed</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @tasks.each do |task| %>
-      <tr>
-        <td><%= task.body %></td>
-        <td><%= task.completed %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<% @completed_tasks.each do |task| %>
+  <div class="task complete"><%= link_to '&#9745;'.html_safe, complete_task_path(task), method: :put %> <%= task.body %> <%= link_to '&#9999;'.html_safe, edit_task_path(task) %> <%= link_to '&#10007;'.html_safe, task, method: :delete, data: { confirm: 'Are you sure?' } %> </div>
+<% end %>
 <br>
 
 <%= link_to 'New Task', new_task_path %>
